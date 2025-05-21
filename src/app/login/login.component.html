@@ -1,0 +1,94 @@
+<div class="login mt-1">
+  <div class="container">
+    <form class="login-form" [formGroup]="form" (ngSubmit)="signUpOrIn()">
+      <h3 class="title">{{ isLoginMode ? "Login Form" : "Register Form" }}</h3>
+
+      <input
+        type="email"
+        placeholder="Enter Your Email"
+        formControlName="email"
+      />
+      <small
+        *ngIf="form.controls['email'].touched && form.controls['email'].invalid"
+        style="margin: -15px; color: red"
+      >
+        check from your email
+      </small>
+
+      <input
+        type="password"
+        placeholder="Enter Your Password"
+        formControlName="password"
+      />
+      <small
+        *ngIf="
+          form.controls['password'].touched && form.controls['password'].invalid
+        "
+        style="margin: -15px; color: red"
+      >
+        check from your password and confirm length>6
+      </small>
+      <div *ngIf="!isLoginMode" class="extra-fields">
+        <input
+          type="text"
+          placeholder="Enter Your Full Name"
+          formControlName="fullName"
+        />
+        <small
+          *ngIf="
+            form.controls['fullName'].touched &&
+            form.controls['fullName'].invalid
+          "
+          style="margin: -15px; color: red"
+        >
+          this field is required
+        </small>
+        <input
+          type="text"
+          placeholder="Enter Your Phone Number"
+          formControlName="phoneNumber"
+        /><small
+          *ngIf="
+            form.controls['phoneNumber'].touched &&
+            form.controls['phoneNumber'].invalid
+          "
+          style="margin: -15px; color: red"
+        >
+          this field is required
+        </small>
+        <input
+          type="text"
+          placeholder="Enter Your Address"
+          formControlName="address"
+        /><small
+          *ngIf="
+            form.controls['address'].touched && form.controls['address'].invalid
+          "
+          style="margin: -15px; color: red"
+        >
+          this field is required
+        </small>
+      </div>
+
+      <button class="submit" type="submit" [disabled]="form.invalid">
+        {{ isLoginMode ? "Login" : "Register" }}
+      </button>
+
+      <p>
+        {{
+          isLoginMode
+            ? "Your mode is Login. If you want to register, click"
+            : "Your mode is Register. If you want to login, click"
+        }}
+        <a
+          type="button"
+          (click)="convertMode()"
+          style="cursor: pointer; color: blue"
+          >here</a
+        >
+      </p>
+      <p *ngIf="error" style="color: red">{{ error }} confirm from your data</p>
+      <p>fill full data</p>
+    </form>
+  </div>
+</div>

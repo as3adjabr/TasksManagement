@@ -1,0 +1,84 @@
+<div class="overlay">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="createOrUpdateTask()"
+    class="formCreateNewTask p-3 gap-3"
+  >
+    <a class="close" (click)="closeWindowFn()">&times;</a>
+    <h2>{{ isCreateMode ? "Create A New Task" : "Update Task Details" }}</h2>
+
+    <div class="input-box">
+      <label>Title*</label>
+      <input type="text" formControlName="title" />
+      <small
+        *ngIf="form.controls['title'].touched && form.controls['title'].invalid"
+      >
+        Title is required
+      </small>
+    </div>
+
+    <div class="input-box">
+      <label>Description*</label>
+      <textarea rows="8" formControlName="desc"></textarea>
+      <small
+        *ngIf="form.controls['desc'].touched && form.controls['desc'].invalid"
+      >
+        Description is required
+      </small>
+    </div>
+
+    <div class="column">
+      <div class="input-box">
+        <label>Assigned To</label>
+        <input type="text" formControlName="assignedTo" />
+      </div>
+      <div class="input-box">
+        <label>Created At</label>
+        <input type="date" formControlName="createdAt" />
+      </div>
+    </div>
+
+    <div class="input-box address">
+      <div class="column">
+        <div class="select-box">
+          <select formControlName="priorety">
+            <option value="" disabled hidden>Priority</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+          <small
+            *ngIf="
+              form.controls['priorety'].touched &&
+              form.controls['priorety'].invalid
+            "
+          >
+            Priority is required
+          </small>
+        </div>
+
+        <div class="select-box">
+          <select formControlName="status">
+            <option value="" disabled hidden>Status</option>
+            <option value="open">Open</option>
+            <option value="started">Started</option>
+            <option value="in-progress">In Progress</option>
+            <option value="complete">Complete</option>
+          </select>
+          <small
+            *ngIf="
+              form.controls['status'].touched && form.controls['status'].invalid
+            "
+          >
+            Status is required
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid" class="submit">
+      {{ isCreateMode ? "Create" : "Update" }}
+    </button>
+  </form>
+</div>

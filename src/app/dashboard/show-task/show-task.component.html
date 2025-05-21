@@ -1,0 +1,14 @@
+<div class="showDetails">
+  <div class="overlay">
+    <div class="details p-3">
+      <h1>{{ selectedTask.title }}</h1>
+      <hr />
+      <p>Created At: {{ selectedTask.createdAt }}</p>
+      <p>Description: {{ selectedTask.desc }}</p>
+      <p>Priorety: {{ selectedTask.priorety }}</p>
+      <p>Assigned To: {{ selectedTask.assignedTo }}</p>
+      <p>Status: {{ selectedTask.status }}</p>
+      <button class="p-1" (click)="showWindowFn()">Close Display</button>
+    </div>
+  </div>
+</div>

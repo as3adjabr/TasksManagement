@@ -1,0 +1,56 @@
+<div class="header p-2 shadow">
+  <div class="container">
+    <div
+      class="row align-content-centerd-flex flex-column flex-sm-row justify-content-center align-content-center align-items-center"
+    >
+      <div
+        class="logo col-6 col-lg-4 col-md-3 col-sm-4 fs-3"
+        style="align-content: center"
+      >
+        <div class="w-100">
+          Tasks Manager!
+          <p *ngIf="isLogin" style="font-size: 18px; color: #777">
+            hello {{ fullName }}
+          </p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-4 col-md-4 col-sm-4" *ngIf="isLogin">
+        <div class="h-100 align-items-center search d-flex">
+          <input
+            placeholder="Search about Task"
+            type="search"
+            class="p-3 me-1 h-25 searchInput shadow"
+            [(ngModel)]="searchText"
+          />
+          <button (click)="search()">
+            <img
+              src="../../assets/images/searchIcon.svg"
+              alt="search"
+              class="searchIcon"
+            />
+          </button>
+        </div>
+      </div>
+      <nav class="col-6 col-lg-4 col-md-5 col-sm-4">
+        <ul class="d-flex col-12 align-items-center justify-content-around">
+          <li>
+            <a [routerLink]="'/home'" [routerLinkActive]="'active'">Home</a>
+          </li>
+          <li *ngIf="isLogin">
+            <a [routerLink]="'/dashboard'" [routerLinkActive]="'active'"
+              >Dashboard</a
+            >
+          </li>
+          <li *ngIf="!isLogin">
+            <a [routerLink]="'/login'" [routerLinkActive]="'active'">Login</a>
+          </li>
+          <li>
+            <a *ngIf="isLogin" [routerLink]="'/login'" (click)="logout()"
+              >Logout</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

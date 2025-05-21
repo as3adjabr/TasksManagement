@@ -1,0 +1,63 @@
+<div class="dashboard p-3">
+  <div class="container">
+    <app-show-task
+      (showWindow)="closeDetails($event)"
+      *ngIf="showDetails"
+    ></app-show-task>
+    <app-create-task
+      *ngIf="showCreateWindow"
+      (closeWindow)="closeWindowCreateTask($event)"
+      [isCreateMode]="isCreateMode"
+      (taskCreated)="loadTasks()"
+    ></app-create-task>
+    <div class="headerDashboard shadow">
+      <h1>DashBoard!</h1>
+      <div class="btns">
+        <button (click)="createTask()">Create Task</button>
+        <button (click)="loadTasks()">Fetch Tasks</button>
+        <button (click)="clearTasks()">Clear Tasks</button>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <p *ngIf="tasks">Not Exists Task</p>
+      <ng-container *ngFor="let task of tasks">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-5">
+          <div class="task" [ngClass]="task.status">
+            <h4>{{ task.title }}</h4>
+            <p>Assigned to: {{ task.assignedTo }}</p>
+            <p>created at: {{ task.createdAt }}</p>
+            <p>Priority: {{ task.priorety }}</p>
+            <p>status: {{ task.status }}</p>
+            <div class="task-action-icons">
+              <button
+                class="task-action-btn"
+                title="Detail"
+                (click)="showDetail()"
+              >
+                <i
+                  class="fas fa-eye"
+                  title="عرض التفاصيل"
+                  (click)="selectedTask(task)"
+                ></i>
+              </button>
+              <button class="task-action-btn Edit" title="Edit">
+                <i
+                  class="fas fa-edit"
+                  title="تعديل"
+                  (click)="selectedTask(task); convertToEditMode()"
+                ></i>
+              </button>
+              <button
+                class="task-action-btn"
+                title="Delete"
+                (click)="deleteTask(task.id)"
+              >
+                <i class="fas fa-trash-alt" title="حذف"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
