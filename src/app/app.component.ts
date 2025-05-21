@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { AuthService } from './Services/auth.service';
 @Component({
   selector: 'app-root',
   imports: [
@@ -19,5 +20,8 @@ import { FooterComponent } from './footer/footer.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'AngularTest';
+  auth: AuthService = inject(AuthService);
+  ngOnInit() {
+    this.auth.autoSignIn();
+  }
 }

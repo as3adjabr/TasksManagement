@@ -3,8 +3,8 @@ export class AuthResponse {
     public idToken: string,
     public email: string,
     public refreshToken: string,
-    private _expiresIn: string,
-    private _localId: string,
+    public _expiresIn: string,
+    public _localId: string,
     public registered?: string
   ) {}
   get localId() {

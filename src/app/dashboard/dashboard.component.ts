@@ -26,8 +26,10 @@ export class DashboardComponent {
     this.showCreateWindow = false;
     this.isCreateMode = true;
 
+    this.tasksAll = this.route.snapshot.data['tasks'] || [];
     this.loadTasks();
 
+    this.tasks = [...this.tasksAll];
     this.route.queryParams.subscribe((params) => {
       this.searchText = params['search'] || '';
       this.filterTasks();
@@ -69,8 +71,10 @@ export class DashboardComponent {
   }
 
   loadTasks() {
-    this.tasksAll = this.route.snapshot.data['tasks'] || [];
-    this.tasks = [...this.tasksAll];
+    this.tasksSer.getTasks().subscribe((tasks) => {
+      this.tasksAll = tasks;
+      this.filterTasks();
+    });
   }
 
   deleteTask(taskId: string) {
